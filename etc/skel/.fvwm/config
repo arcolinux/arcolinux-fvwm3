@@ -329,7 +329,7 @@ read xdgmenu
 # When adding programs you don't need to use the Test (x foo)
 # lines as this is only to help make this menu portable.
 DestroyMenu MenuPrograms
-AddToMenu   MenuPrograms "Programs" Title
+AddToMenu   MenuPrograms "" Title
 + "Thunar" Exec exec thunar
 + "Termite" Exec exec termite
 + "Logout" Exec exec arcolinux-logout
