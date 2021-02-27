@@ -332,6 +332,7 @@ DestroyMenu MenuPrograms
 AddToMenu   MenuPrograms "" Title
 + "Thunar" Exec exec thunar
 + "Termite" Exec exec termite
++ "Sublime" Exec exec subl3
 + "Logout" Exec exec arcolinux-logout
 
 # Background Menu
