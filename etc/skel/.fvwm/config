@@ -43,7 +43,6 @@ SetEnv icons $[HOME]/.fvwm/images/icons/classic
 #SetEnv icons $[HOME]/.fvwm/images/icons/macos
 #SetEnv icons $[HOME]/.fvwm/images/icons/w10
 #SetEnv icons $[HOME]/.fvwm/images/icons/wcircles
-#SetEnv icons $[HOME]/.fvwm/images/icons/win
 
 
 ###########
