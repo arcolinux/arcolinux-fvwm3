@@ -177,7 +177,7 @@ DesktopName 0 1
 DesktopName 1 2
 DesktopName 2 3
 DesktopName 3 4
-#DesktopSize 2x2
+DesktopSize 2x2
 
 # EdgeScroll will move the view port between the Pages when the mouse
 # moves to the edge of the screen. This set the amount of distance to
@@ -212,7 +212,7 @@ MoveThreshold 3
 Style * SloppyFocus, MouseFocusClickRaises
 
 # Default Font
-DefaultFont "xft:Sans:Bold:size=8:antialias=True"
+DefaultFont "xft:NotoSans:Bold:size=9:antialias=True"
 
 # Window Placement
 Style * MinOverlapPlacement, GrabFocusOff, !UsePPosition
@@ -275,12 +275,12 @@ Style FvwmIdent WindowListSkip
 ###########
 # Art-Deco theme (Blue)
 Colorset 0  fg #ffffff, bg #2F343F, hi, sh, Plain, NoShape
-Colorset 1  fg #000000, bg #2F343F, hi, sh, Plain, NoShape
+Colorset 1  fg #c0c5ce, bg #2F343F, hi, sh, Plain, NoShape
 Colorset 2  fg #ffffff, bg #2F343F, hi, sh, Plain, NoShape
-Colorset 3  fg black, bg #0618F9, hi, sh, Plain, NoShape
-Colorset 4  fg black, bg #F9060C, hi #24424f, sh #111f26, Plain, NoShape
-Colorset 5  fg #000000, bg #cbdcca, hi, sh, Plain, NoShape
-Colorset 6  fg #ffffff, bg #F9060C, hi, sh, Plain, NoShape #menu bar
+Colorset 3  fg black, bg #4c566a, hi #24424f, sh #111f26, Plain, NoShape
+Colorset 4  fg black, bg #5e81ac, hi #24424f, sh #111f26, Plain, NoShape
+Colorset 5  fg #ffffff, bg #2f343f , hi, sh, Plain, NoShape
+Colorset 6  fg #ffffff, bg #5e81ac, hi, sh, Plain, NoShape #menu bar
 Colorset 7  fg #000000, bg #ffffff, hi, sh, Plain, NoShape
 Colorset 8  fg #ffffff, bg #2F343F, hi, sh, Plain, NoShape
 Colorset 8  fg #ffffff, bg #2F343F, hi, sh, Plain, NoShape
@@ -297,7 +297,7 @@ MenuStyle * MenuColorset 5, ActiveColorset 6, GreyedColorset 7, TitleColorset 8
 MenuStyle * Hilight3DOff, HilightBack, HilightTitleBack, SeparatorsLong
 MenuStyle * TrianglesSolid, TrianglesUseFore
 MenuStyle * ItemFormat "%|%3.1i%5.3l%5.3>%|"
-MenuStyle * Font "xft:Sans:Bold:size=8:antialias=True"
+MenuStyle * Font "xft:NotoSans:Bold:size=9:antialias=True"
 
 # Root Menu
 #
@@ -307,11 +307,11 @@ DestroyMenu MenuFvwmRoot
 AddToMenu   MenuFvwmRoot "Fvwm" Title
 + "&Programs%icons/programs.png%" Popup MenuPrograms
 + "XDG &Menu%icons/apps.png%" Popup XDGMenu
-+ "&Terminal" Exec exec $[infostore.terminal]
-Test (x dmenu_run) + "DMENU" Exec exec $[infostore.runcmd]
+# + "&Terminal" Exec exec $[infostore.terminal]
+# Test (x dmenu_run) + "DMENU" Exec exec $[infostore.runcmd]
 + "" Nop
-+ "Terminal" Module FvwmConsole -terminal $[infostore.terminal]
-+ "Copy Config%icons/conf.png%" FvwmScript FvwmScript-ConfirmCopyConfig
+# + "Terminal" Module FvwmConsole -terminal $[infostore.terminal]
+# + "Copy Config%icons/conf.png%" FvwmScript FvwmScript-ConfirmCopyConfig
 + "" Nop
 + "Re&fresh%icons/refresh.png%" Refresh
 + "&Restart%icons/restart.png%" Restart
@@ -330,9 +330,9 @@ read xdgmenu
 # lines as this is only to help make this menu portable.
 DestroyMenu MenuPrograms
 AddToMenu   MenuPrograms "Programs" Title
-+ "ARCOLINUX-LOGOUT" Exec exec arcolinux-logout
 + "Thunar" Exec exec thunar
 + "Termite" Exec exec termite
++ "Logout" Exec exec arcolinux-logout
 
 # Background Menu
 #
