@@ -330,6 +330,7 @@ read xdgmenu
 # lines as this is only to help make this menu portable.
 DestroyMenu MenuPrograms
 AddToMenu   MenuPrograms "" Title
++ "Wallpapers%images/icons/wallpaper.png%" Popup BGMenu
 + "Thunar" Exec exec thunar
 + "Termite" Exec exec termite
 + "Sublime" Exec exec subl3
@@ -339,11 +340,14 @@ AddToMenu   MenuPrograms "" Title
 #
 # Backgrounds are located in ~/.fvwm/images/background/
 # Menu icons are located in ~/.fvwm/images/bgicons/
-#DestroyMenu BGMenu
-#AddToMenu   BGMenu "Wallpapers" Title
-#+ "Floral%bgicons/bg1.png%" SetBG bg1.png
-#+ "Circles%bgicons/bg2.png%" SetBG bg2.png
-#+ "Space%bgicons/bg3.png%" SetBG bg3.png
+DestroyMenu BGMenu
+AddToMenu   BGMenu "" Title
++ "Floral%bgicons/bg1.png%" SetBG bg1.png
++ "Circles%bgicons/bg2.png%" SetBG bg2.png
++ "Space%bgicons/bg3.png%" SetBG bg3.png
++ "Mountain%bgicons/bg3.png%" SetBG bg4.jpg
++ "Zoom%bgicons/bg4.png%" SetBG bg5.jpg
++ "Stripes%bgicons/bg5.png%" SetBG bg6.jpg
 
 # Window Operations Menus
 DestroyMenu MenuWindowOps
