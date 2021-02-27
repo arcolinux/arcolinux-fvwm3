@@ -29,11 +29,10 @@
 #
 # The following is used in various menus and also sets the terminal
 # that FvwmConsole uses. Change this to your terminal of choice
-InfoStoreAdd terminal termite
+InfoStoreAdd terminal xterm
 
 # This is used for "Run Command" and the Meta+Space key-binding
-InfoStoreAdd runcmd "dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'NotoMonoRegular:bold:pixelsize=14'"
-
+InfoStoreAdd runcmd "dmenu_run -nb '#2b4e5e'"
 
 ###########
 # 1: Functions
@@ -59,23 +58,12 @@ InfoStoreAdd runcmd "dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf 
 # actions that are run after a restart.
 DestroyFunc StartFunction
 AddToFunc   StartFunction
-
-Exec exec ~/.config/polybar/launch.sh &
-Exec exec feh --bg-fill /usr/share/backgrounds/arcolinux/arco-wallpaper.jpg &
-Exec exec sxhkd -c ~/.config/fvwm3/sxhkd/sxhkdrc &
-Exec exec dex $HOME/.config/autostart/arcolinux-welcome-app.desktop
-Exec exec conky -c $HOME/.config/fvwm3/system-overview &
-Exec exec variety &
-Exec exec nm-applet &
-Exec exec pamac-tray &
-Exec exec xfce4-power-manager &
-Exec exec numlockx on &
-Exec exec blueberry-tray &
-Exec exec picom --config $HOME/.config/fvwm3/picom.conf &
-Exec exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-Exec exec /usr/lib/xfce4/notifyd/xfce4-notifyd &
-Exec exec volumeicon &
-Exec exec xdgmenumaker -f fvwm > ~/.config/fvwm3/xdgmenu
++ I Test (Init, f $[FVWM_USERDIR]/.BGdefault) \
+    Exec exec fvwm-root $[FVWM_USERDIR]/.BGdefault
++ I TestRc (NoMatch) Exec exec fvwm-root \
+    $[FVWM_DATADIR]/default-config/images/background/bg1.png
++ I Module FvwmButtons RightPanel
++ I Module FvwmEvent EventNewDesk
 
 # Mouse Bindings Functions
 DestroyFunc RaiseMoveX
@@ -98,10 +86,10 @@ AddToFunc MoveToCurrent
 #
 # This function loads the man page $0 in an terminal
 # and is used with the help menu.
-#DestroyFunc ViewManPage
-#AddToFunc   ViewManPage
-#+ I Exec exec $[infostore.terminal] -g 80x40 \
-#  -n "Manual Page - $0" -T "Manual Page - $0" -e man "$0"
+DestroyFunc ViewManPage
+AddToFunc   ViewManPage
++ I Exec exec $[infostore.terminal] -g 80x40 \
+  -n "Manual Page - $0" -T "Manual Page - $0" -e man "$0"
 
 # Function: SetBG $0
 #
@@ -109,17 +97,17 @@ AddToFunc MoveToCurrent
 # image and configure it to be loaded the next time fvwm is run.
 # Note, fvwm-root can't use .jpeg or resize images. Use something
 # like display, feh, etc.
-#DestroyFunc SetBG
-#AddToFunc   SetBG
-#+ I Test (f $[FVWM_USERDIR]/images/background/$0) \
-#    Exec exec fvwm-root $[FVWM_USERDIR]/images/background/$0
-#+ I TestRc (Match) Exec exec ln -fs images/background/$0 \
-#    $[FVWM_USERDIR]/.BGdefault
-#+ I TestRc (Match) Break
-#+ I Test (!f $[FVWM_DATADIR]/default-config/images/background/$0) Break
-#+ I Exec exec fvwm-root $[FVWM_DATADIR]/default-config/images/background/$0
-#+ I Exec exec ln -fs $[FVWM_DATADIR]/default-config/images/background/$0 \
-#    $[FVWM_USERDIR]/.BGdefault
+DestroyFunc SetBG
+AddToFunc   SetBG
++ I Test (f $[FVWM_USERDIR]/images/background/$0) \
+    Exec exec fvwm-root $[FVWM_USERDIR]/images/background/$0
++ I TestRc (Match) Exec exec ln -fs images/background/$0 \
+    $[FVWM_USERDIR]/.BGdefault
++ I TestRc (Match) Break
++ I Test (!f $[FVWM_DATADIR]/default-config/images/background/$0) Break
++ I Exec exec fvwm-root $[FVWM_DATADIR]/default-config/images/background/$0
++ I Exec exec ln -fs $[FVWM_DATADIR]/default-config/images/background/$0 \
+    $[FVWM_USERDIR]/.BGdefault
 
 
 # Function: IconManClick
@@ -173,10 +161,10 @@ AddToFunc   ChangeDesk
 #   |   |   |
 #   +---+---+
 #
-DesktopName 0 1
-DesktopName 1 2
-DesktopName 2 3
-DesktopName 3 4
+DesktopName 0 Main
+DesktopName 1 Desk1
+DesktopName 2 Desk2
+DesktopName 3 Desk3
 DesktopSize 2x2
 
 # EdgeScroll will move the view port between the Pages when the mouse
@@ -193,14 +181,7 @@ Style * EdgeMoveDelay 350, EdgeMoveResistance 350
 # EwmhBaseStruts [left] [right] [top] [bottom]
 # Reserves space along the edge(s) of the Screen that will not
 # be covered when maximizing or placing windows.
-EwmhBaseStruts 0 0 30 0
-
-DestroyFunc EWMHActivateWindowFunc
-AddToFunc EWMHActivateWindowFunc I Iconify Off
-+ I Focus
-+ I Raise
-+ I WarpToWindow 50 50
-
+EwmhBaseStruts 0 120 0 0
 
 # This sets the ClickTime and MoveThreshold used to determine
 # Double Clicks, Hold and Move for the mouse.
@@ -212,7 +193,7 @@ MoveThreshold 3
 Style * SloppyFocus, MouseFocusClickRaises
 
 # Default Font
-DefaultFont "xft:NotoSans:Bold:size=9:antialias=True"
+DefaultFont "xft:Sans:Bold:size=8:antialias=True"
 
 # Window Placement
 Style * MinOverlapPlacement, GrabFocusOff, !UsePPosition
@@ -274,17 +255,16 @@ Style FvwmIdent WindowListSkip
 #      14 - FvwmIconMan Iconified Button
 ###########
 # Art-Deco theme (Blue)
-Colorset 0  fg #ffffff, bg #2F343F, hi, sh, Plain, NoShape
-Colorset 1  fg #c0c5ce, bg #2F343F, hi, sh, Plain, NoShape
-Colorset 2  fg #ffffff, bg #2F343F, hi, sh, Plain, NoShape
-Colorset 3  fg black, bg #4c566a, hi #24424f, sh #111f26, Plain, NoShape
-Colorset 4  fg black, bg #5e81ac, hi #24424f, sh #111f26, Plain, NoShape
-Colorset 5  fg #ffffff, bg #2f343f , hi, sh, Plain, NoShape
-Colorset 6  fg #ffffff, bg #5e81ac, hi, sh, Plain, NoShape #menu bar
+Colorset 0  fg #ffffff, bg #2b4e5e, hi, sh, Plain, NoShape
+Colorset 1  fg #000000, bg #88b2b1, hi, sh, Plain, NoShape
+Colorset 2  fg #ffffff, bg #2b4e5e, hi, sh, Plain, NoShape
+Colorset 3  fg black, bg #415554, hi, sh, Plain, NoShape
+Colorset 4  fg black, bg #14252c, hi #24424f, sh #111f26, Plain, NoShape
+Colorset 5  fg #000000, bg #cbdcca, hi, sh, Plain, NoShape
+Colorset 6  fg #ffffff, bg #88b2b1, hi, sh, Plain, NoShape
 Colorset 7  fg #000000, bg #ffffff, hi, sh, Plain, NoShape
-Colorset 8  fg #ffffff, bg #2F343F, hi, sh, Plain, NoShape
-Colorset 8  fg #ffffff, bg #2F343F, hi, sh, Plain, NoShape
-Colorset 10 fg #ffffff, bg #2F343F, hi #aaaaaa, sh #999999, Plain, NoShape
+Colorset 8  fg #ffffff, bg #2b4e5e, hi, sh, Plain, NoShape
+Colorset 10 fg #ffffff, bg #2b4e5e, hi #aaaaaa, sh #999999, Plain, NoShape
 Colorset 11 fg #ffffff, bg #1a6e99, hi #ffffff, sh #ffffff, Plain, NoShape
 Colorset 12 fg #2d2d2d, bg #ffffff, hi, sh, Plain, NoShape
 Colorset 13 fg #ffffff, bg #006c6c, hi, sh, Plain, NoShape
@@ -297,21 +277,23 @@ MenuStyle * MenuColorset 5, ActiveColorset 6, GreyedColorset 7, TitleColorset 8
 MenuStyle * Hilight3DOff, HilightBack, HilightTitleBack, SeparatorsLong
 MenuStyle * TrianglesSolid, TrianglesUseFore
 MenuStyle * ItemFormat "%|%3.1i%5.3l%5.3>%|"
-MenuStyle * Font "xft:NotoSans:Bold:size=9:antialias=True"
+MenuStyle * Font "xft:Sans:Bold:size=8:antialias=True"
 
 # Root Menu
 #
 # The root menu will PopUp with a click in the root
 # window or using alt-f1 (or menu).
 DestroyMenu MenuFvwmRoot
-AddToMenu   MenuFvwmRoot "FVWM3" Title
+AddToMenu   MenuFvwmRoot "Fvwm" Title
 + "&Programs%icons/programs.png%" Popup MenuPrograms
 + "XDG &Menu%icons/apps.png%" Popup XDGMenu
-# + "&Terminal" Exec exec $[infostore.terminal]
-# Test (x dmenu_run) + "DMENU" Exec exec $[infostore.runcmd]
++ "&XTerm%icons/terminal.png%" Exec exec $[infostore.terminal]
+Test (x dmenu_run) + "Run command" Exec exec $[infostore.runcmd]
 + "" Nop
-# + "Terminal" Module FvwmConsole -terminal $[infostore.terminal]
-# + "Copy Config%icons/conf.png%" FvwmScript FvwmScript-ConfirmCopyConfig
++ "Fvwm&Console%icons/terminal.png%" Module FvwmConsole -terminal $[infostore.terminal]
++ "&Wallpapers%icons/wallpaper.png%" Popup BGMenu
++ "M&an Pages%icons/help.png%" Popup MenuFvwmManPages
++ "Copy Config%icons/conf.png%" FvwmScript FvwmScript-ConfirmCopyConfig
 + "" Nop
 + "Re&fresh%icons/refresh.png%" Refresh
 + "&Restart%icons/restart.png%" Restart
@@ -320,9 +302,6 @@ AddToMenu   MenuFvwmRoot "FVWM3" Title
 # Generate XDGMenu
 PipeRead "fvwm-menu-desktop -e"
 
-read xdgmenu
-
-
 # Programs Menu
 #
 # This test for some common programs and adds them to the menu.
@@ -330,19 +309,23 @@ read xdgmenu
 # lines as this is only to help make this menu portable.
 DestroyMenu MenuPrograms
 AddToMenu   MenuPrograms "Programs" Title
-+ "Thunar" Exec exec thunar
-+ "Termite" Exec exec termite
-+ "Logout" Exec exec arcolinux-logout
+Test (x chromium) + "Chromium" Exec exec chromium
+Test (x firefox) + "Firefox" Exec exec firefox
+Test (x google-chrome) + "Google-Chrome" Exec exec google-chrome
+Test (x gvim) + "gVim" Exec exec gvim
+Test (x emacs) + "Emacs" Exec exec emacs
+Test (x gimp) + "Gimp" Exec exec gimp
+Test (x vlc) + "VLC" Exec exec vlc
 
 # Background Menu
 #
 # Backgrounds are located in ~/.fvwm/images/background/
 # Menu icons are located in ~/.fvwm/images/bgicons/
-#DestroyMenu BGMenu
-#AddToMenu   BGMenu "Wallpapers" Title
-#+ "Floral%bgicons/bg1.png%" SetBG bg1.png
-#+ "Circles%bgicons/bg2.png%" SetBG bg2.png
-#+ "Space%bgicons/bg3.png%" SetBG bg3.png
+DestroyMenu BGMenu
+AddToMenu   BGMenu "Wallpapers" Title
++ "Floral%bgicons/bg1.png%" SetBG bg1.png
++ "Circles%bgicons/bg2.png%" SetBG bg2.png
++ "Space%bgicons/bg3.png%" SetBG bg3.png
 
 # Window Operations Menus
 DestroyMenu MenuWindowOps
@@ -359,47 +342,47 @@ AddToMenu   MenuWindowOps
 
 DestroyMenu MenuWindowOpsLong
 AddToMenu   MenuWindowOpsLong
-+ "Move" Move
-+ "Resize" Resize
-+ "(De)Iconify" Iconify
-+ "(Un)Maximize" Maximize
-+ "(Un)Shade" WindowShade
-+ "(Un)Sticky" Stick
-+ "(No)Title Bar" Pick (CirculateHit) ToggleTitle
-+ "Send To" Popup MenuSendTo
++ "Move%icons/win/move.png%" Move
++ "Resize%icons/win/resize.png%" Resize
++ "(De)Iconify%icons/win/iconify.png%" Iconify
++ "(Un)Maximize%icons/win/max.png%" Maximize
++ "(Un)Shade%icons/win/shade.png%" WindowShade
++ "(Un)Sticky%icons/win/sticky.png%" Stick
++ "(No)Title Bar%icons/win/title.png%" Pick (CirculateHit) ToggleTitle
++ "Send To%icons/win/sendto.png%" Popup MenuSendTo
 + "" Nop
-+ "Close" Close
-+ "Destroy" Destroy
++ "Close%icons/win/close.png%" Close
++ "Destroy%icons/win/destroy.png%" Destroy
 + "" Nop
-+ "Raise" Raise
-+ "Lower" Lower
++ "Raise%icons/win/raise.png%" Raise
++ "Lower%icons/win/lower.png%" Lower
 + "" Nop
-+ "Stays On Top" Pick (CirculateHit) Layer 0 6
-+ "Stays Put" Pick (CirculateHit) Layer 0 4
-+ "Stays On Bottom" Pick (CirculateHit) Layer 0 2
++ "Stays On Top%icons/win/top.png%" Pick (CirculateHit) Layer 0 6
++ "Stays Put%icons/win/stays.png%" Pick (CirculateHit) Layer 0 4
++ "Stays On Bottom%icons/win/bottom.png%" Pick (CirculateHit) Layer 0 2
 + "" Nop
-+ "Identify" Module FvwmIdent
++ "Identify%icons/info.png%" Module FvwmIdent
 
 DestroyMenu MenuIconOps
 AddToMenu   MenuIconOps
-+ "(De)Iconify"	Iconify
-+ "(Un)Maximize" 	Maximize
-+ "(Un)Shade"      WindowShade
-+ "(Un)Sticky"	Stick
-+ "(No)TitleBar"	Pick (CirculateHit) ToggleTitle
-+ "Send To"       Popup MenuSendTo
++ "(De)Iconify%icons/win/iconify.png%"	Iconify
++ "(Un)Maximize%icons/win/max.png%" 	Maximize
++ "(Un)Shade%icons/win/shade.png%"      WindowShade
++ "(Un)Sticky%icons/win/sticky.png%"	Stick
++ "(No)TitleBar%icons/win/title.png%"	Pick (CirculateHit) ToggleTitle
++ "Send To%icons/win/sendto.png%"       Popup MenuSendTo
 + "" Nop
-+ "Close"		Close
-+ "Destroy"	Destroy
++ "Close%icons/win/close.png%"		Close
++ "Destroy%icons/win/destroy.png%"	Destroy
 + "" Nop
-+ "Raise"		Raise
-+ "Lower"		Lower
++ "Raise%icons/win/raise.png%"		Raise
++ "Lower%icons/win/lower.png%"		Lower
 + "" Nop
-+ "StaysOnTop"       Pick (CirculateHit) Layer 0 6
-+ "StaysPut"       Pick (CirculateHit) Layer 0 4
-+ "StaysOnBottom" Pick (CirculateHit) Layer 0 2
++ "StaysOnTop%icons/win/top.png%"       Pick (CirculateHit) Layer 0 6
++ "StaysPut%icons/win/stays.png%"       Pick (CirculateHit) Layer 0 4
++ "StaysOnBottom%icons/win/bottom.png%" Pick (CirculateHit) Layer 0 2
 + "" Nop
-+ "Identify"            Module FvwmIdent
++ "Identify%icons/info.png%"            Module FvwmIdent
 
 DestroyMenu MenuSendTo
 AddToMenu MenuSendTo
@@ -658,94 +641,3 @@ DestroyModuleConfig FvwmIconMan:*
 DestroyModuleConfig EventNewDesk:*
 *EventNewDesk: PassID
 *EventNewDesk: new_desk ChangeDesk
-
-
-
-# == Define Menus
-
-# Root Window Menu for window operations
-AddToMenu Window-Ops "Window Ops"      Title
-+                    "Move"            Move-or-Raise
-+                    "Resize"          Resize-or-Raise
-+                    "Raise"           Raise
-+                    "Lower"           Lower
-+                    "(De)Iconify"     Iconify
-+                    "(Un)Stick"       Stick
-+                    "(Un)Maximize"    Maximize
-+                    ""                Nop
-+                    "Delete"          Delete
-+                    "Close"           Close
-+                    "Destroy"         Destroy
-+                    ""                Nop
-+                    "Refresh Screen"  Refresh
-
-# Menu for top left hand ("close") button on windows
-AddToMenu Window-Ops2 "Move"       Move
-+                     "Resize"     Resize
-+                     "(Un)Stick"  Stick
-+                     ""           Nop
-+                     "Delete"     Delete
-+                     "Close"      Close
-+                     "Destroy"    Destroy
-
-
-
-
-
-# == Keyboard bindings
-
-# Paging: Windows key + arrows moves to the next desktop
-# in the desired direction
-Key Left        A       4       Scroll -100 0
-Key Right       A       4       Scroll +100  +0
-Key Up          A       4       Scroll +0 -100
-Key Down        A       4       Scroll +0 +100
-
-# Move active window with Windows key + Alt + Arrows
-Key Left    A   14  Move    w-2 w+0
-Key Right   A   14  Move    w+2 w+0
-Key Up      A   14  Move    w+0 w-2
-Key Down    A   14  Move    w+0 w+2
-
-Key v   A  4 Maximize 0 100		   # 4-v: maximize vertically (toggle)
-Key h   A  4 Maximize 100 0		   # 4-h: maximize horizontally (toggle)
-Key b   A  4 Maximize 100 100		   # 4-b: maximize both ways (toggle)
-Key f   A  4 WindowStyle NoTitle, !Borders # 4-f: full (no borders or title bar)
-Key g   A  4 WindowStyle Title, Borders	   # 4-g: put back borders and title bar
-
-
-## Workspace & window Bindings
-# Close, maximize, and minimize
-Key c WT 4 Close
-Key f WT 4 Maximize
-Key t WT 4 Thumbnail
-# Super + 1-4 to switch workspace
-Key 1 A 4 GotoPage 0 0
-Key 2 A 4 GotoPage 1 0
-Key 3 A 4 GotoPage 2 0
-Key 4 A 4 GotoPage 3 0
-# Super + Shift + 1-4 to send to another workspace
-Key 1 A 4S MovetoPage 0 0
-Key 2 A 4S MovetoPage 1 0
-Key 3 A 4S MovetoPage 2 0
-Key 4 A 4S MovetoPage 3 0
-# Control + Alt + Left/Right like usual
-Key Left A CM GotoPage -1p +0p
-Key Right A CM GotoPage +1p +0p
-# Window snapping
-Key Left A 4 SnapLeft
-Key Right A 4 SnapRight
-Key Up A 4 SnapHalf
-Key Down A 4 SnapQuarter
-Key n A 4 SnapTiny
-# Move to the edge of the screen
-Key Left A C4 Move 0 w+0
-Key Right A C4 Move -0 w+0
-Key Up A C4 Move w+0 0
-Key Down A C4 Move w+0 -0
-# Move to the center of the screen
-Key a A 4 Move 50-50w 50-50w
-# Free move using mouse
-Key m A M Move
-# Free resize using mouse
-Key r A M Resize
