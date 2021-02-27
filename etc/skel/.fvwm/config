@@ -304,7 +304,7 @@ MenuStyle * Font "xft:NotoSans:Bold:size=9:antialias=True"
 # The root menu will PopUp with a click in the root
 # window or using alt-f1 (or menu).
 DestroyMenu MenuFvwmRoot
-AddToMenu   MenuFvwmRoot "Fvwm" Title
+AddToMenu   MenuFvwmRoot "FVWM3" Title
 + "&Programs%icons/programs.png%" Popup MenuPrograms
 + "XDG &Menu%icons/apps.png%" Popup XDGMenu
 # + "&Terminal" Exec exec $[infostore.terminal]
