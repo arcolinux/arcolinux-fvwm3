@@ -305,17 +305,17 @@ MenuStyle * Font "xft:NotoSans:Bold:size=9:antialias=True"
 # window or using alt-f1 (or menu).
 DestroyMenu MenuFvwmRoot
 AddToMenu   MenuFvwmRoot "FVWM3" Title
-+ "&Programs%icons/programs.png%" Popup MenuPrograms
-+ "XDG &Menu%icons/apps.png%" Popup XDGMenu
++ "&Programs%images/icons/programs.png%" Popup MenuPrograms
++ "XDG &Menu%images/icons/apps.png%" Popup XDGMenu
 # + "&Terminal" Exec exec $[infostore.terminal]
 # Test (x dmenu_run) + "DMENU" Exec exec $[infostore.runcmd]
 + "" Nop
 # + "Terminal" Module FvwmConsole -terminal $[infostore.terminal]
-# + "Copy Config%icons/conf.png%" FvwmScript FvwmScript-ConfirmCopyConfig
+# + "Copy Config%images/icons/conf.png%" FvwmScript FvwmScript-ConfirmCopyConfig
 + "" Nop
-+ "Re&fresh%icons/refresh.png%" Refresh
-+ "&Restart%icons/restart.png%" Restart
-+ "&Quit%icons/quit.png%" Module FvwmScript FvwmScript-ConfirmQuit
++ "Re&fresh%images/icons/refresh.png%" Refresh
++ "&Restart%images/icons/restart.png%" Restart
++ "&Quit%images/icons/quit.png%" Module FvwmScript FvwmScript-ConfirmQuit
 
 # Generate XDGMenu
 PipeRead "fvwm-menu-desktop -e"
