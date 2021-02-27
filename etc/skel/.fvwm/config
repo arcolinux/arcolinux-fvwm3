@@ -34,6 +34,17 @@ InfoStoreAdd terminal termite
 # This is used for "Run Command" and the Meta+Space key-binding
 InfoStoreAdd runcmd "dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'NotoMonoRegular:bold:pixelsize=14'"
 
+#SetEnv cache $[HOME]/.fvwm/cache/
+#SetEnv scripts $[HOME]/.fvwm/scripts
+
+#Choose the icons for the windows - min, max and close
+SetEnv icons $[HOME]/.fvwm/images/icons/classic
+#SetEnv icons $[HOME]/.fvwm/images/icons/blocks
+#SetEnv icons $[HOME]/.fvwm/images/icons/macos
+#SetEnv icons $[HOME]/.fvwm/images/icons/w10
+#SetEnv icons $[HOME]/.fvwm/images/icons/wcircles
+#SetEnv icons $[HOME]/.fvwm/images/icons/win
+
 
 ###########
 # 1: Functions
@@ -177,7 +188,13 @@ DesktopName 0 1
 DesktopName 1 2
 DesktopName 2 3
 DesktopName 3 4
-DesktopSize 2x2
+DesktopName 4 5
+DesktopName 5 6
+DesktopName 6 7
+DesktopName 7 8
+DesktopName 8 9
+DesktopName 9 10
+DesktopSize 4x1
 
 # EdgeScroll will move the view port between the Pages when the mouse
 # moves to the edge of the screen. This set the amount of distance to
@@ -214,8 +231,8 @@ Style * SloppyFocus, MouseFocusClickRaises
 # Default Font
 DefaultFont "xft:NotoSans:Bold:size=9:antialias=True"
 
-# Window Placement
-Style * MinOverlapPlacement, GrabFocusOff, !UsePPosition
+# Window Placement (MinOverlapPlacement)
+Style * PositionPlacement Center, !GrabFocusOff, !UsePPosition
 
 # Sets all windows to OpaqueMove (vs a wired frame) and  windows will
 # snap to each other and the edge of the screen.
@@ -528,30 +545,50 @@ Mouse 3 I    A Menu MenuIconOps
 #   4 - Maximize
 #   6 - Minimize
 ###########
-TitleStyle Centered Height 18 -- Flat
-ButtonStyle All ActiveUp Vector 5 15x15@4 15x85@3 85x85@3 85x15@3 \
+TitleStyle Centered Height 24 -- Flat
+Add UseTitleStyle
+  Style * TitleAtLeft
+  ButtonStyle All -- UseTitleStyle flat
+
+#ButtonStyle All ActiveUp Vector 5 15x15@4 15x85@3 85x85@3 85x15@3 \
                 15x15@3 -- Flat
-ButtonStyle All ToggledActiveUp Vector 5 15x15@4 15x85@3 85x85@3 \
+#ButtonStyle All ToggledActiveUp Vector 5 15x15@4 15x85@3 85x85@3 \
                 85x15@3 15x15@3 -- Flat
-ButtonStyle All ActiveDown Vector 5 20x20@4 20x80@3 80x80@3 80x20@3 \
+#ButtonStyle All ActiveDown Vector 5 20x20@4 20x80@3 80x80@3 80x20@3 \
                 20x20@3 -- Flat
-ButtonStyle All ToggledActiveDown Vector 5 20x20@4 20x80@3 80x80@3 \
+#ButtonStyle All ToggledActiveDown Vector 5 20x20@4 20x80@3 80x80@3 \
                 80x20@3 20x20@3 -- Flat
-ButtonStyle All ToggledInactive Vector 5 47x47@3 57x53@3 53x53@3 \
+#ButtonStyle All ToggledInactive Vector 5 47x47@3 57x53@3 53x53@3 \
                 53x47@3 47x47@3 -- Flat
-ButtonStyle All Inactive Vector 5 47x47@3 57x53@3 53x53@3 53x47@3 \
+#ButtonStyle All Inactive Vector 5 47x47@3 57x53@3 53x53@3 53x47@3 \
                 47x47@3 -- Flat
 AddButtonStyle 1 Active Vector 5 45x45@3 55x45@3 55x55@3 45x55@3 45x45@3
-AddButtonStyle 2 Active Vector 4 35x35@3 65x65@3 65x35@4 35x65@3
-AddButtonStyle 4 Active Vector 8 30x70@3 30x30@3 70x30@3 70x70@3 30x70@3 \
+#AddButtonStyle 2 Active Vector 4 35x35@3 65x65@3 65x35@4 35x65@3
+#AddButtonStyle 4 Active Vector 8 30x70@3 30x30@3 70x30@3 70x70@3 30x70@3 \
                  30x50@4 50x50@3 50x70@3
-AddButtonStyle 4 ToggledActiveUp Vector 8 30x70@3 30x30@3 70x30@3 70x70@3 \
+#AddButtonStyle 4 ToggledActiveUp Vector 8 30x70@3 30x30@3 70x30@3 70x70@3 \
                  30x70@3 50x30@4 50x50@3 70x50@3
-AddButtonStyle 6 Active Vector 5 35x60@3 65x60@3 65x50@3 35x50@3 35x60@3
-ButtonStyle All - Clear
-ButtonStyle 1 - MwmDecorMenu
-ButtonStyle 4 - MwmDecorMax
-ButtonStyle 6 - MwmDecorMin
+#AddButtonStyle 6 Active Vector 5 35x60@3 65x60@3 65x50@3 35x50@3 35x60@3
+AddButtonStyle 2 \
+  ActiveUp (Pixmap $[icons]/1.png -- Flat) \
+  ToggledActiveUp (Pixmap $[icons]/1.png -- Flat) \
+  ToggledActiveDown (Pixmap $[icons]/0.png -- Flat) \
+  ActiveDown (Pixmap $[icons]/0.png -- Flat) \
+  Inactive (Pixmap $[icons]/0.png -- Flat)
+
+AddButtonStyle 4 \
+  ActiveUp (Pixmap $[icons]/2.png -- Flat) \
+  ActiveDown (Pixmap $[icons]/0.png -- Flat) \
+  Inactive (Pixmap $[icons]/0.png -- Flat)
+
+AddButtonStyle 6 \
+  ActiveUp (Pixmap $[icons]/3.png -- Flat) \
+  ActiveDown (Pixmap $[icons]/0.png -- Flat) \
+  Inactive (Pixmap $[icons]/0.png -- Flat)
+
+#ButtonStyle 1 - MwmDecorMenu
+#ButtonStyle 4 - MwmDecorMax
+#ButtonStyle 6 - MwmDecorMin
 
 ############
 # 7: Modules
