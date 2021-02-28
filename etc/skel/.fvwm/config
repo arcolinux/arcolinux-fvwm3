@@ -108,10 +108,10 @@ AddToFunc MoveToCurrent
 #
 # This function loads the man page $0 in an terminal
 # and is used with the help menu.
-#DestroyFunc ViewManPage
-#AddToFunc   ViewManPage
-#+ I Exec exec $[infostore.terminal] -g 80x40 \
-#  -n "Manual Page - $0" -T "Manual Page - $0" -e man "$0"
+# DestroyFunc ViewManPage
+# AddToFunc   ViewManPage
+# + I Exec exec $[infostore.terminal] -g 80x40 \
+#   -n "Manual Page - $0" -T "Manual Page - $0" -e man "$0"
 
 # Function: SetBG $0
 #
@@ -119,30 +119,30 @@ AddToFunc MoveToCurrent
 # image and configure it to be loaded the next time fvwm is run.
 # Note, fvwm-root can't use .jpeg or resize images. Use something
 # like display, feh, etc.
-#DestroyFunc SetBG
-#AddToFunc   SetBG
-#+ I Test (f $[FVWM_USERDIR]/images/background/$0) \
-#    Exec exec fvwm-root $[FVWM_USERDIR]/images/background/$0
-#+ I TestRc (Match) Exec exec ln -fs images/background/$0 \
-#    $[FVWM_USERDIR]/.BGdefault
-#+ I TestRc (Match) Break
-#+ I Test (!f $[FVWM_DATADIR]/default-config/images/background/$0) Break
-#+ I Exec exec fvwm-root $[FVWM_DATADIR]/default-config/images/background/$0
-#+ I Exec exec ln -fs $[FVWM_DATADIR]/default-config/images/background/$0 \
-#    $[FVWM_USERDIR]/.BGdefault
+# DestroyFunc SetBG
+# AddToFunc   SetBG
+# + I Test (f $[FVWM_USERDIR]/images/background/$0) \
+#     Exec exec fvwm-root $[FVWM_USERDIR]/images/background/$0
+# + I TestRc (Match) Exec exec ln -fs images/background/$0 \
+#     $[FVWM_USERDIR]/.BGdefault
+# + I TestRc (Match) Break
+# + I Test (!f $[FVWM_DATADIR]/default-config/images/background/$0) Break
+# + I Exec exec fvwm-root $[FVWM_DATADIR]/default-config/images/background/$0
+# + I Exec exec ln -fs $[FVWM_DATADIR]/default-config/images/background/$0 \
+#     $[FVWM_USERDIR]/.BGdefault
 
 
 # Function: IconManClick
 #
 # This function is run from FvwmIconMan when the button is clicked.
-DestroyFunc IconManClick
-AddToFunc   IconManClick
-+ I ThisWindow (Raised, !Shaded, !Iconic, CurrentPage) Iconify
-+ I TestRc (Match) Break
-+ I ThisWindow WindowShade off
-+ I ThisWindow Iconify off
-+ I ThisWindow Raise
-+ I ThisWindow (AcceptsFocus) FlipFocus
+# DestroyFunc IconManClick
+# AddToFunc   IconManClick
+# + I ThisWindow (Raised, !Shaded, !Iconic, CurrentPage) Iconify
+# + I TestRc (Match) Break
+# + I ThisWindow WindowShade off
+# + I ThisWindow Iconify off
+# + I ThisWindow Raise
+# + I ThisWindow (AcceptsFocus) FlipFocus
 
 # Function: ToggleTitle
 #
@@ -187,13 +187,7 @@ DesktopName 0 1
 DesktopName 1 2
 DesktopName 2 3
 DesktopName 3 4
-DesktopName 4 5
-DesktopName 5 6
-DesktopName 6 7
-DesktopName 7 8
-DesktopName 8 9
-DesktopName 9 10
-DesktopSize 4x1
+DesktopSize 2x2
 
 # EdgeScroll will move the view port between the Pages when the mouse
 # moves to the edge of the screen. This set the amount of distance to
@@ -356,18 +350,19 @@ AddToMenu   MenuPrograms "" Title
 #
 # Backgrounds are located in ~/.fvwm/images/background/
 # Menu icons are located in ~/.fvwm/images/bgicons/
-DestroyMenu BGMenu
-AddToMenu   BGMenu "" Title
-+ "Floral%bgicons/bg1.png%" SetBG bg1.png
-+ "Circles%bgicons/bg2.png%" SetBG bg2.png
-+ "Space%bgicons/bg3.png%" SetBG bg3.png
-+ "Mountain%bgicons/bg3.png%" SetBG bg4.jpg
-+ "Zoom%bgicons/bg4.png%" SetBG bg5.jpg
-+ "Stripes%bgicons/bg5.png%" SetBG bg6.jpg
+# DestroyMenu BGMenu
+# AddToMenu   BGMenu "" Title
+# + "Floral%bgicons/bg1.png%" SetBG bg1.png
+# + "Circles%bgicons/bg2.png%" SetBG bg2.png
+# + "Space%bgicons/bg3.png%" SetBG bg3.png
+# + "Mountain%bgicons/bg3.png%" SetBG bg4.jpg
+# + "Zoom%bgicons/bg4.png%" SetBG bg5.jpg
+# + "Stripes%bgicons/bg5.png%" SetBG bg6.jpg
 
 # Window Operations Menus
 DestroyMenu MenuWindowOps
 AddToMenu   MenuWindowOps
++ "Restart"   Restart
 + "Move"      Move
 + "Resize"    Resize
 + "Iconify"   Iconify
@@ -380,6 +375,7 @@ AddToMenu   MenuWindowOps
 
 DestroyMenu MenuWindowOpsLong
 AddToMenu   MenuWindowOpsLong
++ "Restart" Restart
 + "Move" Move
 + "Resize" Resize
 + "(De)Iconify" Iconify
@@ -506,7 +502,7 @@ Silent Key Space A M Exec exec $[infostore.runcmd]
 
 # Window Buttons: [1 3 5 7 9  TTTTT  0 8 6 4 2]
 #   1 - Open the WindowOps menu.
-#   2 - Close on single click, Destory on double click.
+#   2 - Close on single click, Destroy on double click.
 #   4 - Maximize (right/middle button will only maximize vertical/horizontal)
 #   6 - Iconify (minimize)
 Mouse 1 1 A Menu MenuWindowOps Delete
@@ -545,9 +541,9 @@ Mouse 3 I    A Menu MenuIconOps
 #   6 - Minimize
 ###########
 TitleStyle Centered Height 24 -- Flat
-Add UseTitleStyle
-  Style * TitleAtLeft
-  ButtonStyle All -- UseTitleStyle flat
+# Add UseTitleStyle
+#   Style * TitleAtLeft
+#   ButtonStyle All -- UseTitleStyle flat
 
 #ButtonStyle All ActiveUp Vector 5 15x15@4 15x85@3 85x85@3 85x15@3 \
                 15x15@3 -- Flat
