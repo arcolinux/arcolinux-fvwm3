@@ -340,7 +340,8 @@ read xdgmenu
 # lines as this is only to help make this menu portable.
 DestroyMenu MenuPrograms
 AddToMenu   MenuPrograms "" Title
-+ "Wallpapers%images/icons/wallpaper.png%" Popup BGMenu
+# + "Wallpapers%images/icons/wallpaper.png%" Popup BGMenu
+# + "Man Pages" Popup MenuFvwmManPages
 + "Thunar" Exec exec thunar
 + "Termite" Exec exec termite
 + "Sublime" Exec exec subl3
@@ -440,29 +441,29 @@ AddToMenu   MenuSendToPage
 
 
 # Fvwm Man Pages (Help) Menu
-DestroyMenu MenuFvwmManPages
-AddToMenu   MenuFvwmManPages "Help" Title
-+ "fvwm"                ViewManPage fvwm
-+ "FvwmAnimate"         ViewManPage FvwmAnimate
-+ "FvwmAuto"            ViewManPage FvwmAuto
-+ "FvwmBacker"          ViewManPage FvwmBacker
-+ "FvwmButtons"         ViewManPage FvwmButtons
-+ "FvwmCommand"         ViewManPage FvwmCommand
-+ "FvwmConsole"         ViewManPage FvwmConsole
-+ "FvwmEvent"           ViewManPage FvwmEvent
-+ "FvwmIconMan"         ViewManPage FvwmIconMan
-+ "FvwmIdent"           ViewManPage FvwmIdent
-+ "FvwmPager"           ViewManPage FvwmPager
-+ "FvwmPerl"            ViewManPage FvwmPerl
-+ "FvwmProxy"           ViewManPage FvwmProxy
-+ "FvwmRearrange"       ViewManPage FvwmRearrange
-+ "FvwmScript"          ViewManPage FvwmScript
-+ "" Nop
-+ "fvwm-root"	        ViewManPage fvwm-root
-+ "fvwm-menu-desktop"   ViewManPage fvwm-menu-desktop
-+ "fvwm-menu-directory" ViewManPage fvwm-menu-directory
-+ "fvwm-menu-xlock"     ViewManPage fvwm-menu-xlock
-+ "fvwm-config"         ViewManPage fvwm-config
+# DestroyMenu MenuFvwmManPages
+# AddToMenu   MenuFvwmManPages "Help" Title
+# + "fvwm"                ViewManPage fvwm
+# + "FvwmAnimate"         ViewManPage FvwmAnimate
+# + "FvwmAuto"            ViewManPage FvwmAuto
+# + "FvwmBacker"          ViewManPage FvwmBacker
+# + "FvwmButtons"         ViewManPage FvwmButtons
+# + "FvwmCommand"         ViewManPage FvwmCommand
+# + "FvwmConsole"         ViewManPage FvwmConsole
+# + "FvwmEvent"           ViewManPage FvwmEvent
+# + "FvwmIconMan"         ViewManPage FvwmIconMan
+# + "FvwmIdent"           ViewManPage FvwmIdent
+# + "FvwmPager"           ViewManPage FvwmPager
+# + "FvwmPerl"            ViewManPage FvwmPerl
+# + "FvwmProxy"           ViewManPage FvwmProxy
+# + "FvwmRearrange"       ViewManPage FvwmRearrange
+# + "FvwmScript"          ViewManPage FvwmScript
+# + "" Nop
+# + "fvwm-root"	        ViewManPage fvwm-root
+# + "fvwm-menu-desktop"   ViewManPage fvwm-menu-desktop
+# + "fvwm-menu-directory" ViewManPage fvwm-menu-directory
+# + "fvwm-menu-xlock"     ViewManPage fvwm-menu-xlock
+# + "fvwm-config"         ViewManPage fvwm-config
 
 #######
 # 5: Mouse and Key bindings
@@ -497,8 +498,6 @@ Silent Key F1 A C GotoDesk 0 0
 Silent Key F2 A C GotoDesk 0 1
 Silent Key F3 A C GotoDesk 0 2
 Silent Key F4 A C GotoDesk 0 3
-Silent Key Super_R A A Exec exec $[infostore.terminal]
-Silent Key Space A M Exec exec $[infostore.runcmd]
 
 # Window Buttons: [1 3 5 7 9  TTTTT  0 8 6 4 2]
 #   1 - Open the WindowOps menu.
@@ -679,7 +678,7 @@ DestroyModuleConfig FvwmIconMan:*
 *FvwmIconMan: DrawIcons always
 *FvwmIconMan: ReliefThickness 0
 *FvwmIconMan: Format "%t"
-*FvwmIconMan: Font "xft:Sans:Bold:size=8:antialias=True"
+*FvwmIconMan: Font "xft:NotoSans:Bold:size=9:antialias=True"
 *FvwmIconMan: Action Mouse 0 A ret
 *FvwmIconMan: Action Mouse 1 A sendcommand IconManClick
 *FvwmIconMan: Action Mouse 3 A sendcommand "Menu MenuIconOps"
