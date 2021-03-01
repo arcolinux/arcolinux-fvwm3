@@ -43,7 +43,7 @@ SetEnv icons $[HOME]/.fvwm/images/icons/classic
 #SetEnv icons $[HOME]/.fvwm/images/icons/macos
 #SetEnv icons $[HOME]/.fvwm/images/icons/w10
 #SetEnv icons $[HOME]/.fvwm/images/icons/wcircles
-
+#SetEnv icons $[HOME]/.fvwm/images/icons/sea
 
 ###########
 # 1: Functions
@@ -70,12 +70,13 @@ SetEnv icons $[HOME]/.fvwm/images/icons/classic
 DestroyFunc StartFunction
 AddToFunc   StartFunction
 
+Exec exec pkill volumeicon
+Exec exec pkill variety
 Exec exec ~/.config/polybar/launch.sh &
 Exec exec feh --bg-fill /usr/share/backgrounds/arcolinux/arco-wallpaper.jpg &
 Exec exec sxhkd -c ~/.config/fvwm3/sxhkd/sxhkdrc &
 Exec exec dex $HOME/.config/autostart/arcolinux-welcome-app.desktop
 Exec exec conky -c $HOME/.config/fvwm3/system-overview &
-Exec exec variety &
 Exec exec nm-applet &
 Exec exec pamac-tray &
 Exec exec xfce4-power-manager &
@@ -84,8 +85,9 @@ Exec exec blueberry-tray &
 Exec exec picom --config $HOME/.config/fvwm3/picom.conf &
 Exec exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 Exec exec /usr/lib/xfce4/notifyd/xfce4-notifyd &
-Exec exec volumeicon &
 Exec exec xdgmenumaker -f fvwm > ~/.config/fvwm3/xdgmenu
+Exec exec volumeicon &
+Exec exec variety &
 
 # Mouse Bindings Functions
 DestroyFunc RaiseMoveX
@@ -342,6 +344,7 @@ DestroyMenu MenuPrograms
 AddToMenu   MenuPrograms "" Title
 # + "Wallpapers%images/icons/wallpaper.png%" Popup BGMenu
 # + "Man Pages" Popup MenuFvwmManPages
++ "Pager" Module FvwmPager 0 3
 + "Thunar" Exec exec thunar
 + "Termite" Exec exec termite
 + "Sublime" Exec exec subl3
@@ -487,8 +490,7 @@ AddToMenu   MenuSendToPage
 
 # Alt-F1 or Menu to load the root menu and Alt-Tab for a WindowList.
 # Ctrl-F1/F2/F3/F4 will switch between the Virtual Desktops.
-# Super_R (windows key) will launch a terminal.
-# Alt-Space to launch dmenu (Note: dmenu must be present in the system)
+# Ctrl-Shift-d to launch dmenu (Note: dmenu must be present in the system)
 #
 # Silent supresses any errors (such as keyboards with no Menu key).
 Silent Key F1 A M Menu MenuFvwmRoot
@@ -594,7 +596,7 @@ AddButtonStyle 6 \
 # a window. One use is getting the class/resource/name of a window.
 DestroyModuleConfig FvwmIdent:*
 *FvwmIdent: Colorset 10
-*FvwmIdent: Font "xft:Sans:size=10:antialias=True"
+*FvwmIdent: Font "xft:NotoSans:size=10:antialias=True"
 
 # FvwmScript
 #
@@ -695,34 +697,6 @@ DestroyModuleConfig EventNewDesk:*
 *EventNewDesk: PassID
 *EventNewDesk: new_desk ChangeDesk
 
-
-
-# == Define Menus
-
-# Root Window Menu for window operations
-AddToMenu Window-Ops "Window Ops"      Title
-+                    "Move"            Move-or-Raise
-+                    "Resize"          Resize-or-Raise
-+                    "Raise"           Raise
-+                    "Lower"           Lower
-+                    "(De)Iconify"     Iconify
-+                    "(Un)Stick"       Stick
-+                    "(Un)Maximize"    Maximize
-+                    ""                Nop
-+                    "Delete"          Delete
-+                    "Close"           Close
-+                    "Destroy"         Destroy
-+                    ""                Nop
-+                    "Refresh Screen"  Refresh
-
-# Menu for top left hand ("close") button on windows
-AddToMenu Window-Ops2 "Move"       Move
-+                     "Resize"     Resize
-+                     "(Un)Stick"  Stick
-+                     ""           Nop
-+                     "Delete"     Delete
-+                     "Close"      Close
-+                     "Destroy"    Destroy
 
 
 
