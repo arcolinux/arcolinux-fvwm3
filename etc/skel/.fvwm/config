@@ -18,7 +18,7 @@
 #    5: Bindings
 #    6: Decor
 #    7: Modules
-#
+#  http://zensites.net/fvwm/guide/
 #################################
 
 # InfoStoreAdd can be used to store variable data internal to fvwm.
@@ -34,8 +34,21 @@ InfoStoreAdd terminal termite
 # This is used for "Run Command" and the Meta+Space key-binding
 InfoStoreAdd runcmd "dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'NotoMonoRegular:bold:pixelsize=14'"
 
-#SetEnv cache $[HOME]/.fvwm/cache/
-#SetEnv scripts $[HOME]/.fvwm/scripts
+# ==================================================
+#           $HOME/.fvwm/config
+
+SetEnv pictures_home $[HOME]/Pictures
+SetEnv fvwm_home $[HOME]/.fvwm
+SetEnv fvwm_images $[fvwm_home]/images
+SetEnv fvwm_icons $[fvwm_img]/icons
+SetEnv fvwm_wallpapers $[fvwm_img]/wallpapers
+#SetEnv fvwm_cache $[HOME]/.fvwm/cache/
+#SetEnv fvwm_scripts $[HOME]/.fvwm/scripts
+
+SetEnv fvwm_music_player /usr/bin/audacious
+SetEnv fvwm_video_player /usr/bin/vlc
+SetEnv fvwm_editor /usr/bin/emacs
+
 
 #Choose the icons for the windows - min, max and close
 SetEnv icons $[HOME]/.fvwm/images/icons/classic
@@ -69,6 +82,8 @@ SetEnv icons $[HOME]/.fvwm/images/icons/classic
 # actions that are run after a restart.
 DestroyFunc StartFunction
 AddToFunc   StartFunction
++ I Module FvwmPager 0 2
++ I Module FvwmButtons MyButtons
 
 Exec exec pkill volumeicon
 Exec exec pkill variety
@@ -82,9 +97,13 @@ Exec exec pamac-tray &
 Exec exec xfce4-power-manager &
 Exec exec numlockx on &
 Exec exec blueberry-tray &
-Exec exec picom --config $HOME/.config/fvwm3/picom.conf &
+#Exec exec picom --config $HOME/.config/fvwm3/picom.conf &
+Exec exec picom
 Exec exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 Exec exec /usr/lib/xfce4/notifyd/xfce4-notifyd &
+Exec exec plank &
+#Exec exec tint2 &
+Exec exec volumeicon &
 Exec exec xdgmenumaker -f fvwm > ~/.config/fvwm3/xdgmenu
 Exec exec volumeicon &
 Exec exec variety &
@@ -185,11 +204,11 @@ AddToFunc   ChangeDesk
 #   |   |   |
 #   +---+---+
 #
-DesktopName 0 1
-DesktopName 1 2
-DesktopName 2 3
-DesktopName 3 4
-DesktopSize 2x2
+DesktopName 0 Main
+DesktopName 1 Code
+DesktopName 2 Browse
+DesktopName 3 Music
+DesktopSize 3x3
 
 # EdgeScroll will move the view port between the Pages when the mouse
 # moves to the edge of the screen. This set the amount of distance to
@@ -759,3 +778,60 @@ Key a A 4 Move 50-50w 50-50w
 Key m A M Move
 # Free resize using mouse
 Key r A M Resize
+
+
+Style "tint2"        !Title, !Handles, !Borders, StaysOnTop, EWMHIgnoreStrutHints, Sticky, EWMHPlacementIgnoreWorkingArea, NeverFocus, WindowListSkip
+
+Style "conky"        NoTitle, !Handles, !Borders, Sticky, WindowListSkip, \
+  CirculateSkip, FixedPosition, FixedSize, !Iconifiable, NeverFocus, StaysOnTop
+
+Style "plank"        !Title, !Handles, !Borders, StaysOnTop, EWMHIgnoreStrutHints, Sticky, EWMHPlacementIg
+
+Style "FvwmPager" NoTitle, !Handles, !Borders, Sticky, WindowListSkip, \
+  CirculateSkip, FixedPosition, FixedSize, !Iconifiable
+# StaysOnTop
+DestroyModuleConfig FvwmPager: *
+*FvwmPager: Geometry 320x100+0-0
+*FvwmPager: Colorset * 3
+*FvwmPager: HilightColorset * 10
+*FvwmPager: BalloonColorset * 9
+*FvwmPager: WindowColorsets 9 10
+*FvwmPager: Font "xft:Sans:Bold:pixelsize=12:minspace=True:antialias=True"
+*FvwmPager: Balloons All
+*FvwmPager: BalloonFont "xft:Sans:Bold:pixelsize=12:minspace=True:antialias=True"
+*FvwmPager: BallonYOffset +2
+*FvwmPager: Window3dBorders
+*FvwmPager: MiniIcons
+*FvwmPager: UseSkipList
+*FvwmPager: Rows 1
+*FvwmPager: Columns 3
+# *FvwmPager: DeskHilight Black
+# *FvwmPager: Hilight Black
+
+Style "MyButtons" NoTitle, !Handles, !Borders, Sticky, WindowListSkip, \
+  CirculateSkip, StaysOnBottom, FixedPosition, FixedSize, !Iconifiable
+
+DestroyModuleConfig MyButtons: *
+*MyButtons: Geometry 420x60+320-0
+*MyButtons: Colorset 9
+*MyButtons: Rows 1
+*MyButtons: Columns 38
+*MyButtons: Frame 0
+*MyButtons: Font "Shadow=3:xft:Sans:Bold:pixelsize=14:minspace=True:antialias=True"
+*MyButtons: (2x1, Frame 0, Title(Center) "")
+*MyButtons: (5x1, Frame 0, Icon 48x48/terminal.png, \
+  Action(Mouse 1) "FvwmTerm", \
+  Action(Mouse 3) "FvwmTerm")
+*MyButtons: (5x1, Frame 0, Icon 48x48/audacious.png, \
+  Action(Mouse 1) "FvwmMusicPlayer")
+*MyButtons: (5x1, Frame 0, Icon 48x48/emacs.png, \
+  Action(Mouse 1) "FvwmEditor")
+*MyButtons: (5x1, Frame 0, Icon 48x48/gimp.png, \
+  Action(Mouse 1) "FvwmGimp")
+*MyButtons: (5x1, Frame 0, Icon 48x48/firefox.png, \
+  Action(Mosue 1) "FvwmBrowser")
+*MyButtons: (5x1, Frame 0, Icon 48x48/riot.png, \
+  Action(Mouse 1) "FvwmChat")
+*MyButtons: (5x1, Frame 0, Icon 48x48/tux.png, \
+  Action(Mouse 1) "FvwmLaunch")
+*MyButtons: (1x1, Frame 0)noreWorkingArea, NeverFocus, WindowListSkip
