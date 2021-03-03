@@ -97,8 +97,8 @@ Exec exec pamac-tray &
 Exec exec xfce4-power-manager &
 Exec exec numlockx on &
 Exec exec blueberry-tray &
-#Exec exec picom --config $HOME/.config/fvwm3/picom.conf &
-Exec exec picom
+Exec exec picom --config $HOME/.config/fvwm3/picom.conf &
+#Exec exec picom
 Exec exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 Exec exec /usr/lib/xfce4/notifyd/xfce4-notifyd &
 Exec exec plank &
