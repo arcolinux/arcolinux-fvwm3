@@ -36,27 +36,44 @@ InfoStoreAdd runcmd "dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf 
 
 # ==================================================
 #           $HOME/.fvwm/config
+# ==================================================
 
 SetEnv pictures_home $[HOME]/Pictures
 SetEnv fvwm_home $[HOME]/.fvwm
 SetEnv fvwm_images $[fvwm_home]/images
-SetEnv fvwm_icons $[fvwm_img]/icons
-SetEnv fvwm_wallpapers $[fvwm_img]/wallpapers
+SetEnv fvwm_themes $[fvwm_home]/themes
 #SetEnv fvwm_cache $[HOME]/.fvwm/cache/
 #SetEnv fvwm_scripts $[HOME]/.fvwm/scripts
 
-SetEnv fvwm_music_player /usr/bin/audacious
+#Images folder
+SetEnv fvwm_backgrounds $[fvwm_images]/backgrounds
+SetEnv fvwm_bgicons $[fvwm_images]/bgicons
+SetEnv fvwm_icons $[fvwm_images]/icons
+SetEnv fvwm_launchers $[fvwm_images]/launchers
+SetEnv fvwm_windowicons $[fvwm_images]/windowicons
+
+#Standard applications
+SetEnv fvwm_terminal /usr/bin/termite
+SetEnv fvwm_music_player /usr/bin/pragha
 SetEnv fvwm_video_player /usr/bin/vlc
-SetEnv fvwm_editor /usr/bin/emacs
+SetEnv fvwm_editor /usr/bin/subl3
+SetEnv fvwm_filemanager /usr/bin/thunar
+SetEnv fvwm_browser /usr/bin/firefox
+SetEnv fvwm_compare /usr/bin/meld
 
 
 #Choose the icons for the windows - min, max and close
-SetEnv icons $[HOME]/.fvwm/images/icons/classic
-#SetEnv icons $[HOME]/.fvwm/images/icons/blocks
-#SetEnv icons $[HOME]/.fvwm/images/icons/macos
-#SetEnv icons $[HOME]/.fvwm/images/icons/w10
-#SetEnv icons $[HOME]/.fvwm/images/icons/wcircles
-#SetEnv icons $[HOME]/.fvwm/images/icons/sea
+#SetEnv icons $[fvwm_windowicons]/blocks
+#SetEnv icons $[fvwm_windowicons]/buttons
+#SetEnv icons $[fvwm_windowicons]/circles
+SetEnv icons $[fvwm_windowicons]/classic
+#SetEnv icons $[fvwm_windowicons]/macos
+#SetEnv icons $[fvwm_windowicons]/sea
+#SetEnv icons $[fvwm_windowicons]/w10
+#SetEnv icons $[fvwm_windowicons]/wcircles
+
+
+ImagePath $[fvwm_icons]:$[fvwm_launchers]:$[fvwm_backgrounds]:+
 
 ###########
 # 1: Functions
@@ -83,7 +100,7 @@ SetEnv icons $[HOME]/.fvwm/images/icons/classic
 DestroyFunc StartFunction
 AddToFunc   StartFunction
 + I Module FvwmPager 0 2
-+ I Module FvwmButtons MyButtons
++ I Module FvwmButtons Launchers
 
 Exec exec pkill volumeicon
 Exec exec pkill variety
@@ -101,7 +118,6 @@ Exec exec picom --config $HOME/.config/fvwm3/picom.conf &
 #Exec exec picom
 Exec exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 Exec exec /usr/lib/xfce4/notifyd/xfce4-notifyd &
-Exec exec plank &
 #Exec exec tint2 &
 Exec exec volumeicon &
 Exec exec xdgmenumaker -f fvwm > ~/.config/fvwm3/xdgmenu
@@ -785,11 +801,16 @@ Style "tint2"        !Title, !Handles, !Borders, StaysOnTop, EWMHIgnoreStrutHint
 Style "conky"        NoTitle, !Handles, !Borders, Sticky, WindowListSkip, \
   CirculateSkip, FixedPosition, FixedSize, !Iconifiable, NeverFocus, StaysOnTop
 
-Style "plank"        !Title, !Handles, !Borders, StaysOnTop, EWMHIgnoreStrutHints, Sticky, EWMHPlacementIg
+
+############
+# 8: FvwmPager
+#############
+
 
 Style "FvwmPager" NoTitle, !Handles, !Borders, Sticky, WindowListSkip, \
   CirculateSkip, FixedPosition, FixedSize, !Iconifiable
-# StaysOnTop
+
+
 DestroyModuleConfig FvwmPager: *
 *FvwmPager: Geometry 320x100+0-0
 *FvwmPager: Colorset * 3
@@ -808,30 +829,31 @@ DestroyModuleConfig FvwmPager: *
 # *FvwmPager: DeskHilight Black
 # *FvwmPager: Hilight Black
 
-Style "MyButtons" NoTitle, !Handles, !Borders, Sticky, WindowListSkip, \
+
+############
+# 9: Launcher
+#############
+
+
+Style "Launchers" NoTitle, !Handles, !Borders, Sticky, WindowListSkip, \
   CirculateSkip, StaysOnBottom, FixedPosition, FixedSize, !Iconifiable
 
-DestroyModuleConfig MyButtons: *
-*MyButtons: Geometry 420x60+320-0
-*MyButtons: Colorset 9
-*MyButtons: Rows 1
-*MyButtons: Columns 38
-*MyButtons: Frame 0
-*MyButtons: Font "Shadow=3:xft:Sans:Bold:pixelsize=14:minspace=True:antialias=True"
-*MyButtons: (2x1, Frame 0, Title(Center) "")
-*MyButtons: (5x1, Frame 0, Icon 48x48/terminal.png, \
-  Action(Mouse 1) "FvwmTerm", \
-  Action(Mouse 3) "FvwmTerm")
-*MyButtons: (5x1, Frame 0, Icon 48x48/audacious.png, \
-  Action(Mouse 1) "FvwmMusicPlayer")
-*MyButtons: (5x1, Frame 0, Icon 48x48/emacs.png, \
-  Action(Mouse 1) "FvwmEditor")
-*MyButtons: (5x1, Frame 0, Icon 48x48/gimp.png, \
-  Action(Mouse 1) "FvwmGimp")
-*MyButtons: (5x1, Frame 0, Icon 48x48/firefox.png, \
-  Action(Mosue 1) "FvwmBrowser")
-*MyButtons: (5x1, Frame 0, Icon 48x48/riot.png, \
-  Action(Mouse 1) "FvwmChat")
-*MyButtons: (5x1, Frame 0, Icon 48x48/tux.png, \
-  Action(Mouse 1) "FvwmLaunch")
-*MyButtons: (1x1, Frame 0)noreWorkingArea, NeverFocus, WindowListSkip
+DestroyModuleConfig Launchers: *
+*Launchers: Geometry 540x60+320-0
+*Launchers: Colorset 3
+*Launchers: Rows 1
+*Launchers: Columns 38
+*Launchers: Frame 0
+*Launchers: Font "Shadow=3:xft:NotoSans:Bold:pixelsize=14:minspace=True:antialias=True"
+*Launchers: (2x1, Frame 0, Title(Center) "")
+*Launchers: (5x1, Frame 0, Icon terminal.svg, 		Action(Mouse 1) Exec exec $[fvwm_terminal])
+*Launchers: (5x1, Frame 0, Icon thunar.svg, 		Action(Mouse 1) Exec exec $[fvwm_filemanager])
+*Launchers: (5x1, Frame 0, Icon firefox.svg, 		Action(Mouse 1) Exec exec $[fvwm_browser])
+*Launchers: (5x1, Frame 0, Icon meld.svg,			Action(Mouse 1) Exec exec $[fvwm_compare])
+*Launchers: (5x1, Frame 0, Icon sublime-text.svg,	Action(Mouse 1) Exec exec $[fvwm_editor])
+*Launchers: (5x1, Frame 0, Icon gimp.svg,			Action(Mouse 1) Exec exec gimp)
+*Launchers: (5x1, Frame 0, Icon inkscape.svg,		Action(Mouse 1) Exec exec inkscape)
+*Launchers: (5x1, Frame 0, Icon discord.svg,		Action(Mouse 1) Exec exec discord)
+*Launchers: (5x1, Frame 0, Icon telegram.svg,		Action(Mouse 1) Exec exec telegram-desktop)
+*Launchers: (5x1, Frame 0, Icon shutdown.svg,		Action(Mouse 1) Exec exec arcolinux-logout)
+*Launchers: (1x1, Frame 0) noreWorkingArea, NeverFocus, WindowListSkip )
