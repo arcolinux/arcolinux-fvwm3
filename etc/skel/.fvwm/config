@@ -210,7 +210,7 @@ AddToFunc   ChangeDesk
 
 
 ##################################################################
-# 2: Styles 
+# 2: Styles
 ##################################################################
 
 # Desktops and Pages
@@ -227,8 +227,7 @@ AddToFunc   ChangeDesk
 #
 DesktopName 0 Main
 DesktopName 1 Code
-DesktopName 2 Browse
-DesktopName 3 Music
+DesktopName 2 Play
 DesktopSize 3x3
 
 # EdgeScroll will move the view port between the Pages when the mouse
@@ -329,7 +328,7 @@ Style FvwmIdent WindowListSkip
 Colorset 0  fg #ffffff, bg #2F343F, hi, sh, Plain, NoShape
 Colorset 1  fg #c0c5ce, bg #2F343F, hi, sh, Plain, NoShape
 Colorset 2  fg #ffffff, bg #2F343F, hi, sh, Plain, NoShape
-Colorset 3  fg black, bg #4c566a, hi #24424f, sh #111f26, Plain, NoShape
+Colorset 3  fg #aaaaaa, bg #4c566a, hi #24424f, sh #111f26, Plain, NoShape
 Colorset 4  fg black, bg #5e81ac, hi #24424f, sh #111f26, Plain, NoShape
 Colorset 5  fg #ffffff, bg #2f343f , hi, sh, Plain, NoShape
 Colorset 6  fg #ffffff, bg #5e81ac, hi, sh, Plain, NoShape #menu bar
