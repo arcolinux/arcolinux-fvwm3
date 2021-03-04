@@ -813,7 +813,7 @@ Style "conky"        NoTitle, !Handles, !Borders, Sticky, WindowListSkip, \
 
 
 Style "FvwmPager" NoTitle, !Handles, !Borders, Sticky, WindowListSkip, \
-  CirculateSkip, FixedPosition, FixedSize, !Iconifiable
+  CirculateSkip, StaysOnBottom, FixedPosition, FixedSize, !Iconifiable
 
 
 DestroyModuleConfig FvwmPager: *
