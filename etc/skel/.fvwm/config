@@ -126,8 +126,7 @@ Exec exec /usr/lib/xfce4/notifyd/xfce4-notifyd &
 #Exec exec tint2 &
 Exec exec volumeicon &
 Exec exec xdgmenumaker -f fvwm > ~/.config/fvwm3/xdgmenu
-Exec exec volumeicon &
-Exec exec variety &
+Exec exec sleep 2 & variety &
 
 # Mouse Bindings Functions
 DestroyFunc RaiseMoveX
