@@ -105,7 +105,7 @@ ImagePath $[fvwm_icons]:$[fvwm_launchers]:$[fvwm_backgrounds]:+
 DestroyFunc StartFunction
 AddToFunc   StartFunction
 + I Module FvwmPager 0 2
-+ I Module FvwmButtons Launchers
+# + I Module FvwmButtons Launchers
 
 Exec exec pkill volumeicon
 Exec exec pkill variety
