@@ -33,7 +33,7 @@
 #
 # The following is used in various menus and also sets the terminal
 # that FvwmConsole uses. Change this to your terminal of choice
-InfoStoreAdd terminal termite
+InfoStoreAdd terminal urxvt
 
 # This is used for "Run Command" and the Meta+Space key-binding
 InfoStoreAdd runcmd "dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'NotoMonoRegular:bold:pixelsize=14'"
@@ -58,7 +58,7 @@ SetEnv fvwm_launchers $[fvwm_images]/launchers
 SetEnv fvwm_windowicons $[fvwm_images]/windowicons
 
 #Standard applications
-SetEnv fvwm_terminal /usr/bin/termite
+SetEnv fvwm_terminal /usr/bin/urxvt
 SetEnv fvwm_music_player /usr/bin/pragha
 SetEnv fvwm_video_player /usr/bin/vlc
 SetEnv fvwm_editor /usr/bin/subl3
@@ -384,7 +384,7 @@ AddToMenu   MenuPrograms "" Title
 # + "Man Pages" Popup MenuFvwmManPages
 + "Pager" Module FvwmPager 0 3
 + "Thunar" Exec exec thunar
-+ "Termite" Exec exec termite
++ "Urxvt" Exec exec urxvt
 + "Sublime" Exec exec subl3
 + "Logout" Exec exec arcolinux-logout
 

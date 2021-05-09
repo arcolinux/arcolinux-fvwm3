@@ -88,7 +88,7 @@ AddToMenu "System"
 + "Fcitx 5" Exec /usr/bin/fcitx5
 + "GParted" Exec /usr/bin/gparted 
 + "Hardware Locality lstopo" Exec lstopo
-+ "Termite" Exec termite
++ "Urxvt" Exec urxvt
 + "Thunar File Manager" Exec thunar 
 + "Xfce Terminal" Exec xfce4-terminal
 + "urxvt" Exec urxvt
