@@ -61,7 +61,7 @@ SetEnv fvwm_windowicons $[fvwm_images]/windowicons
 SetEnv fvwm_terminal /usr/bin/urxvt
 SetEnv fvwm_music_player /usr/bin/pragha
 SetEnv fvwm_video_player /usr/bin/vlc
-SetEnv fvwm_editor /usr/bin/subl3
+SetEnv fvwm_editor /usr/bin/subl
 SetEnv fvwm_filemanager /usr/bin/thunar
 SetEnv fvwm_browser /usr/bin/firefox
 SetEnv fvwm_compare /usr/bin/meld
@@ -385,7 +385,7 @@ AddToMenu   MenuPrograms "" Title
 + "Pager" Module FvwmPager 0 3
 + "Thunar" Exec exec thunar
 + "Urxvt" Exec exec urxvt
-+ "Sublime" Exec exec subl3
++ "Sublime" Exec exec subl
 + "Logout" Exec exec arcolinux-logout
 
 # Background Menu
