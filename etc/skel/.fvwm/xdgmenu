@@ -29,7 +29,7 @@ AddToMenu "Development"
 + "Development" Title
 + "GitAhead" Exec gitahead
 + "Meld" Exec meld 
-+ "Sublime Text 3 Dev" Exec subl3 
++ "Sublime Text Dev" Exec subl 
 
 DestroyMenu "Graphics"
 AddToMenu "Graphics"
