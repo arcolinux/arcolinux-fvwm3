@@ -13,7 +13,7 @@ DestroyMenu "Accessories"
 AddToMenu "Accessories"
 + "Accessories" Title
 + "ArcoLinux Betterlockscreen" Exec /usr/local/bin/arcolinux-betterlockscreen
-+ "Arcolinux Tweak Tool" Exec /usr/local/bin/arcolinux-tweak-tool
++ "Archlinux Tweak Tool" Exec /usr/local/bin/archlinux-tweak-tool
 + "Disks" Exec gnome-disks
 + "Keyboard layout viewer" Exec kbd-layout-viewer5
 + "Software Token" Exec stoken-gui
