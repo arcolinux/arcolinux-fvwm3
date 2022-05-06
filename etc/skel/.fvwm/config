@@ -386,7 +386,7 @@ AddToMenu   MenuPrograms "" Title
 + "Thunar" Exec exec thunar
 + "Urxvt" Exec exec urxvt
 + "Sublime" Exec exec subl
-+ "Logout" Exec exec arcolinux-logout
++ "Logout" Exec exec archlinux-logout
 
 # Background Menu
 #
@@ -881,5 +881,5 @@ DestroyModuleConfig Launchers: *
 #*Launchers: (5x1, Frame 0, Icon inkscape.svg,		Action(Mouse 1) Exec exec inkscape)
 *Launchers: (5x1, Frame 0, Icon discord.svg,		Action(Mouse 1) Exec exec discord)
 *Launchers: (5x1, Frame 0, Icon telegram.svg,		Action(Mouse 1) Exec exec telegram-desktop)
-*Launchers: (5x1, Frame 0, Icon shutdown.svg,		Action(Mouse 1) Exec exec arcolinux-logout)
+*Launchers: (5x1, Frame 0, Icon shutdown.svg,		Action(Mouse 1) Exec exec archlinux-logout)
 *Launchers: (1x1, Frame 0) noreWorkingArea, NeverFocus, WindowListSkip )
